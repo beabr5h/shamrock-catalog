@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shamrock Distribution – Wholesale Catalog</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --green:#2e7d32;--green-dark:#1b5e20;--green-light:#4caf50;--green-pale:#e8f5e9;
+  --gold:#c8a84b;--dark:#1a1a1a;--gray:#666;--light:#f8f8f6;--border:#e0e0e0;--white:#fff;
+}
+
+body{font-family:'Open Sans',sans-serif;background:var(--light);color:var(--dark);}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(150deg,#1b5e20 0%,#2e7d32 60%,#388e3c 100%);
+  padding:60px 40px 50px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;border:70px solid rgba(255,255,255,.04);top:-200px;right:-150px;}
+.hero::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;border:50px solid rgba(255,255,255,.03);bottom:-100px;left:-100px;}
+.hero-logo{height:90px;object-fit:contain;margin-bottom:16px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3));position:relative;z-index:1;}
+.hero h1{font-family:'Montserrat',sans-serif;font-size:42px;font-weight:900;color:#fff;letter-spacing:2px;text-transform:uppercase;line-height:1.1;position:relative;z-index:1;}
+.hero h1 span{color:var(--gold);}
+.hero-sub{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.65);letter-spacing:6px;text-transform:uppercase;margin-top:8px;position:relative;z-index:1;}
+.hero-divider{width:60px;height:3px;background:var(--gold);margin:20px auto;border-radius:2px;position:relative;z-index:1;}
+.hero-tagline{font-size:14px;color:rgba(255,255,255,.6);font-style:italic;position:relative;z-index:1;}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:8px 24px;border-radius:30px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:16px;position:relative;z-index:1;}
+
+/* ── STICKY NAV ── */
+.sticky-nav{
+  position:sticky;top:0;z-index:100;
+  background:#fff;border-bottom:3px solid var(--green);
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;gap:12px;
+  padding:12px 24px;overflow-x:auto;
+  scrollbar-width:none;
+}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-search{
+  flex-shrink:0;display:flex;align-items:center;gap:8px;
+  background:var(--light);border:1.5px solid var(--border);
+  border-radius:8px;padding:7px 14px;min-width:200px;
+}
+.nav-search input{border:none;background:transparent;font-family:'Open Sans',sans-serif;font-size:13px;outline:none;width:100%;color:var(--dark);}
+.nav-search svg{flex-shrink:0;opacity:.4;}
+.nav-divider{width:1px;height:28px;background:var(--border);flex-shrink:0;}
+.cat-btn{
+  flex-shrink:0;padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);
+  background:#fff;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;cursor:pointer;color:var(--gray);
+  transition:all .2s;white-space:nowrap;
+}
+.cat-btn:hover{border-color:var(--green);color:var(--green);}
+.cat-btn.active{background:var(--green);border-color:var(--green);color:#fff;}
+
+/* ── CART BAR ── */
+.cart-bar{
+  position:fixed;bottom:24px;right:24px;z-index:200;
+  background:var(--green);color:#fff;border-radius:50px;
+  padding:14px 24px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 8px 24px rgba(46,125,50,.4);cursor:pointer;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;
+  transition:transform .2s,box-shadow .2s;
+  display:none;
+}
+.cart-bar:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(46,125,50,.5);}
+.cart-count{background:var(--gold);color:var(--dark);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;}
+
+/* ── MAIN ── */
+.main{max-width:1200px;margin:0 auto;padding:40px 24px;}
+
+/* ── CATEGORY SECTION ── */
+.cat-section{margin-bottom:56px;}
+.cat-header{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:24px;padding-bottom:14px;
+  border-bottom:3px solid var(--green);
+}
+.cat-icon{width:46px;height:46px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.cat-title{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:1px;}
+.cat-subtitle{font-size:11px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+.cat-count{margin-left:auto;font-family:'Montserrat',sans-serif;font-size:11px;color:#aaa;letter-spacing:1px;}
+
+/* ── PRODUCT GRID ── */
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.product-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.product-grid{grid-template-columns:1fr;}}
+
+/* ── PRODUCT CARD ── */
+.product-card{
+  background:#fff;border-radius:12px;overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+  transition:transform .2s,box-shadow .2s;
+  cursor:pointer;display:flex;flex-direction:column;
+}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.1);}
+
+.card-img{
+  width:100%;aspect-ratio:1/1;
+  background:var(--light);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;border-bottom:1px solid var(--border);
+  position:relative;
+}
+.card-img img{width:100%;height:100%;object-fit:contain;padding:16px;}
+.coming-soon{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  width:100%;height:100%;padding:20px;
+}
+.coming-soon-icon{font-size:40px;opacity:.25;}
+.coming-soon-text{
+  font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;
+  color:#bbb;letter-spacing:2px;text-transform:uppercase;text-align:center;
+}
+
+.card-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:6px;}
+.card-name{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--dark);line-height:1.3;}
+.card-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.card-meta span{
+  font-size:10px;color:var(--gray);background:var(--light);
+  padding:3px 8px;border-radius:20px;border:1px solid var(--border);
+  font-weight:600;
+}
+
+.card-footer{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--border);
+}
+.price-cell{padding:12px 16px;display:flex;flex-direction:column;gap:3px;}
+.price-cell:first-child{border-right:1px solid var(--border);}
+.price-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#aaa;font-family:'Montserrat',sans-serif;font-weight:600;}
+.price-value{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;}
+.price-cell.wholesale .price-value{color:var(--green);}
+.price-cell.msrp .price-value{color:var(--dark);}
+.margin-tag{
+  font-size:9px;color:var(--green);font-weight:700;
+  background:var(--green-pale);border-radius:10px;
+  padding:2px 7px;display:inline-block;width:fit-content;
+  font-family:'Montserrat',sans-serif;
+}
+
+.add-to-order{
+  width:100%;padding:10px;background:var(--green);color:#fff;
+  border:none;font-family:'Montserrat',sans-serif;font-size:11px;
+  font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  cursor:pointer;transition:background .2s;
+}
+.add-to-order:hover{background:var(--green-dark);}
+.add-to-order.added{background:var(--gold);color:var(--dark);}
+
+/* ── MODAL ── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{
+  background:#fff;border-radius:16px;max-width:700px;width:100%;
+  max-height:90vh;overflow-y:auto;
+  transform:translateY(20px);transition:transform .2s;
+}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-img{width:100%;aspect-ratio:4/3;background:var(--light);display:flex;align-items:center;justify-content:center;border-radius:16px 16px 0 0;overflow:hidden;}
+.modal-img img{width:100%;height:100%;object-fit:contain;padding:24px;}
+.modal-body{padding:28px;}
+.modal-cat{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.modal-name{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:var(--dark);margin-bottom:16px;line-height:1.2;}
+.modal-details{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.modal-detail{background:var(--light);border-radius:8px;padding:12px 16px;}
+.modal-detail-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#aaa;font-family:'Montserrat',sans-serif;font-weight:600;margin-bottom:4px;}
+.modal-detail-value{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:var(--dark);}
+.modal-detail.green .modal-detail-value{color:var(--green);}
+.modal-close{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.4);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.modal-inner{position:relative;}
+.modal-add-btn{
+  width:100%;padding:14px;background:var(--green);color:#fff;border:none;
+  border-radius:8px;font-family:'Montserrat',sans-serif;font-size:14px;
+  font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+  transition:background .2s;
+}
+.modal-add-btn:hover{background:var(--green-dark);}
+.modal-add-btn.added{background:var(--gold);color:var(--dark);}
+
+/* ── ORDER MODAL ── */
+.order-modal{max-width:600px;}
+.order-items{margin:16px 0;max-height:300px;overflow-y:auto;}
+.order-item{display:flex;align-items:center;gap:12px;padding:12px;border-bottom:1px solid var(--border);}
+.order-item-img{width:48px;height:48px;object-fit:contain;background:var(--light);border-radius:6px;padding:4px;}
+.order-item-name{flex:1;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;}
+.order-item-price{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--green);}
+.qty-ctrl{display:flex;align-items:center;gap:8px;}
+.qty-btn{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.qty-btn:hover{border-color:var(--green);color:var(--green);}
+.qty-num{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;min-width:20px;text-align:center;}
+.order-form{display:flex;flex-direction:column;gap:12px;margin-top:16px;}
+.order-form input,.order-form textarea{
+  padding:12px 14px;border:1.5px solid var(--border);border-radius:8px;
+  font-family:'Open Sans',sans-serif;font-size:13px;outline:none;
+  transition:border-color .2s;
+}
+.order-form input:focus,.order-form textarea:focus{border-color:var(--green);}
+.order-form textarea{resize:vertical;min-height:80px;}
+.order-total{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:var(--green);text-align:right;margin:8px 0;}
+.submit-btn{
+  width:100%;padding:14px;background:var(--green);color:#fff;border:none;
+  border-radius:8px;font-family:'Montserrat',sans-serif;font-size:14px;
+  font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+}
+.submit-btn:hover{background:var(--green-dark);}
+.empty-cart{text-align:center;padding:30px;color:#aaa;font-family:'Montserrat',sans-serif;font-size:13px;}
+
+/* ── FOOTER ── */
+.footer{background:var(--green-dark);color:rgba(255,255,255,.6);text-align:center;padding:30px 20px;font-size:12px;margin-top:60px;}
+.footer strong{color:#fff;font-family:'Montserrat',sans-serif;}
+
+/* ── NO RESULTS ── */
+.no-results{text-align:center;padding:60px 20px;color:#aaa;font-family:'Montserrat',sans-serif;font-size:14px;}
+.loading{text-align:center;padding:80px;font-family:'Montserrat',sans-serif;font-size:14px;color:#aaa;letter-spacing:1px;}
+
+/* ── SUCCESS MSG ── */
+.success-msg{background:var(--green-pale);border:1.5px solid var(--green-light);border-radius:8px;padding:16px;text-align:center;font-family:'Montserrat',sans-serif;font-size:13px;color:var(--green);font-weight:700;margin-top:12px;display:none;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1777302752/Shamrock_Distribution_Logo_uxkjoh.png" alt="Shamrock Distribution" class="hero-logo">
+  <div class="hero-sub">Wholesale Price Guide</div>
+  <div class="hero-divider"></div>
+  <div class="hero-tagline">International Snacks · Accessories · Novelty Goods</div>
+  <div class="hero-badge">2026 Product Catalog</div>
+</div>
+
+<!-- STICKY NAV -->
+<div class="sticky-nav">
+  <div class="nav-inner">
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Search products..." oninput="filterProducts()">
+    </div>
+    <div class="nav-divider"></div>
+    <button class="cat-btn active" onclick="filterCat('all',this)">All</button>
+    <button class="cat-btn" onclick="filterCat('Cookies',this)">🍪 Cookies</button>
+    <button class="cat-btn" onclick="filterCat('Chips',this)">🥔 Chips</button>
+    <button class="cat-btn" onclick="filterCat('Drinks',this)">🥤 Drinks</button>
+    <button class="cat-btn" onclick="filterCat('Candy',this)">🍬 Candy</button>
+    <button class="cat-btn" onclick="filterCat('Candles',this)">🕯️ Candles</button>
+    <button class="cat-btn" onclick="filterCat('Signs',this)">🪧 Signs</button>
+    <button class="cat-btn" onclick="filterCat('Coffee Mugs',this)">☕ Mugs</button>
+    <button class="cat-btn" onclick="filterCat('Wraps',this)">🌿 Wraps</button>
+    <button class="cat-btn" onclick="filterCat('Smoking Accessories',this)">🛠️ Accessories</button>
+    <button class="cat-btn" onclick="filterCat('Hand Pipes',this)">🪈 Hand Pipes</button>
+    <button class="cat-btn" onclick="filterCat('Water Pipes',this)">💧 Water Pipes</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main">
+  <div class="loading" id="loading">Loading catalog...</div>
+</div>
+
+<!-- CART BAR -->
+<div class="cart-bar" id="cartBar" onclick="openOrderModal()">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+  View Order
+  <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+      <div class="modal-img" id="modalImg"></div>
+      <div class="modal-body">
+        <div class="modal-cat" id="modalCat"></div>
+        <div class="modal-name" id="modalName"></div>
+        <div class="modal-details" id="modalDetails"></div>
+        <button class="modal-add-btn" id="modalAddBtn" onclick="addToOrderFromModal()">+ Add to Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="orderModal" onclick="closeOrderModalOverlay(event)">
+  <div class="modal order-modal">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeOrderModal()">✕</button>
+      <div class="modal-body">
+        <div class="modal-name">Your Order</div>
+        <div class="order-items" id="orderItems"></div>
+        <div class="order-total" id="orderTotal"></div>
+        <div class="order-form" id="orderForm">
+          <input type="text" id="retailerName" placeholder="Your Name / Business Name *" required>
+          <input type="email" id="retailerEmail" placeholder="Your Email *" required>
+          <input type="tel" id="retailerPhone" placeholder="Phone Number">
+          <textarea id="orderNotes" placeholder="Any special notes or requests..."></textarea>
+          <button class="submit-btn" onclick="submitOrder()">📧 Send Order to Shamrock Distribution</button>
+        </div>
+        <div class="success-msg" id="successMsg">✅ Order sent! We'll be in touch shortly.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>☘️ Shamrock Distribution</strong><br>
+  <span style="margin-top:6px;display:block;">For Authorized Retailers Only · <a href="mailto:support@shamrockdistribution.com" style="color:var(--gold);">support@shamrockdistribution.com</a></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script>
+const CSV_URL = '/api/products';
+const CLOUD  = 'dhcmesl9r';
+
+// Cloudinary image map — key = product name (lowercase, trimmed)
+const IMAGE_MAP = {
+  'oreo cinnamon bun':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370732/Oreo_Cinnamon_Bun_Korea_yzmamj.png',
+  'oreo ice cream matcha':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370741/Oreo_Ice_Cream_Matcha_China_d7attm.jpg',
+  'oreo grape & peach':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370770/Oreo_Grape_Peach_China_cz0hac.png',
+  'oreo blueberry & raspberry':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370764/Oreo_Blueberry_Raspberry_China_dosozw.png',
+  'oreo birthday cake':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370770/Oreo_Birthday_Cake_China_j1g45z.png',
+  "lay's cucumber":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370571/Lay_s_Cucumber_China_yxzh8f.jpg',
+  "lay's grilled squid":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370603/Lay_s_Grilled_Squid_China_hrpxao.jpg',
+  "lay's fried crab":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370582/Lay_s_Fried_Crab_China_waskvb.jpg',
+  "lay's mexican tomato chicken":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370599/Lay_s_Mexican_Tomato_Chicken_China_yk8qs6.png',
+  "lay's numb & spicy hot pot":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370607/Lay_s_Numb_and_Spicy_Hot_Pot_China_vlaftf.jpg',
+  "lay's roasted chicken wings":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370612/Lay_s_Roasted_Chicken_Wings_China_wkkna1.png',
+  "lay's spicy crayfish":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370608/Lay_s_Spicy_Crayfish_China_n9pjps.jpg',
+  "lay's wavy latiao spicy strip":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370605/Lay_s_WAVY_Latiao_Spicy_Strip_China_m3jkta.jpg',
+  "lay's kumquat":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370591/Lay_s_Kumquat_China_vtpcjs.png',
+  "lay's abalone":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370570/Lay_s_Abalone_China_xno7n9.jpg',
+  "lay's green bamboo":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370581/Lay_s_Green_Bamboo_China_wosnh7.jpg',
+  "lay's heinz ketchup":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370584/Lay_s_Ketchup_China_ck2tu1.jpg',
+  "lay's wavy carbon roasted pork belly":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370583/Lay_s_Carbon_Roasted_Pork_Belly_China_nkr2t2.png',
+  "lay's 2-in-1 grilled shrimp & seafood":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370582/Lay_s_2-in-1_Grilled_Shrimp_Seafood_hqrxyh.jpg',
+  "lay's big wave seaweed":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370571/Lay_s_Big_Wave_Seaweed_Thailand_szoixc.jpg',
+  "lay's extra bbq":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370572/Lay_s_Extra_BBQ_Thailand_ruojrn.jpg',
+  "lay's hot and spicy":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370583/Lay_s_Hot_and_Spicy_Thailand_gl9ift.jpg',
+  "lay's max ghost pepper":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370609/Lay_s_MAX_Ghost_Pepper_Thailand_lfq7lo.jpg',
+  "lay's salted egg":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370608/Lay_s_Salted_Egg_Thailand_d9du2h.jpg',
+  'cheetos grilled steak flavor':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370570/Cheetos_Grilled_Steak_Flavor_China_nf3svd.jpg',
+  'ocean bomb dbz sparkling water – apple':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370661/Ocean_Bomb_DBZ_Sparkling_Water-_Apple_hekurv.jpg',
+  'ocean bomb dbz sparkling water – orange':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370672/Ocean_Bomb_DBZ_Sparkling_Water-_Orange_js1bnv.jpg',
+  'ocean bomb dbz sparkling water – melon':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370666/Ocean_Bomb_DBZ_Sparkling_Water-_Melon_kjfx4x.png',
+  'fanta grape soda':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370675/Fanta_Grape_Soda_z9fucy.png',
+  'fanta jasmine peach soda':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370674/Fanta_Jasmine_Peach_Soda_g3aup7.png',
+  'fettucine gummy candy – grape':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370500/Fettucine_Gummy_Candy-_Grape_1_xkz7lo.png',
+  'mike & ike – original fruits':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370708/3.5_Hand_Pipe-Rasta_Man_vlyugz.webp',
+  'mike & ike – red rageous':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370703/3.5_Hand_Pipe-Ziggy_kurjh4.webp',
+  'ice breakers – wintergreen':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370699/3.5_Hand_Pipe-_Chillin_B_r8jugi.webp',
+  'hostess twinkies':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370645/Pot_Head_Mug_qurnzv.webp',
+  'stoner ave':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370821/Stoner_Ave_uugdec.webp',
+  'mary jane ave':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370830/Mary_Jane_Ln_ovy3r9.webp',
+  'high st':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370833/High_St_Sign_b58qdd.webp',
+  'exit 420':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370827/Exit_420_Sign_xgwcl9.webp',
+  'gold / mugs & nugs':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370641/Mugs_and_Nugs_Mug_zry81a.webp',
+  'gold / pot head':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370645/Pot_Head_Mug_qurnzv.webp',
+  'frosted / sugar skull':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370639/Frosted_Sugar_Skull_Mug_rmiuno.webp',
+  'metallic smoke / f stoned':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370640/F-ing_Stoned_Mug_bd2lno.webp',
+  'high hemp organic wraps – strawberry milk':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370988/High_Hemp-Strawberry_Milk_nubt6b.webp',
+  'high hemp organic wraps – grape ape':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370996/High_Hemp-Grape_Ape_fa9qsr.webp',
+  'high hemp organic wraps – baked kookies':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370960/High_Hemp-Baked_Kookies_metekt.webp',
+  'high hemp organic wraps – flora passion':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370988/High_Hemp-Flora_Passion_rxmu2s.webp',
+  'high hemp organic wraps – area 51 green apple':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776371012/High_Hemp-_Area_51_Green_Apple_nqdjzd.webp',
+  'high hemp organic wraps – pineapple paradise':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370966/High_Hemp-Pineapple_Paradise_osmhnl.jpg',
+  'zooted hemp wraps – mad mango':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370989/Zooted_Wraps-Mad_Mango_swiefe.webp',
+  'santa cruz shredder x wiz khalifa hemp tray – small (16 count display)':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370862/Santa_Cruz_Shredder_x_Wiz_Khalifa_Hemp_Tray_-_Small_-_16_Count_Display_nkqctj.webp',
+  'santa cruz shredder × wiz khalifa rolling tray – small':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370865/Santa_Cruz_Shredder_x_Wiz_Khalifa_Hemp_Tray_-_Small_-_16_Count_Display_3_gftksh.webp',
+  'raw "six shooter" cone loader':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370862/RAW_Six_Shooter_Cone_Loader_iyoqj5.jpg',
+  "3.5\" hand made resin pipe – chillin' b":'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370699/3.5_Hand_Pipe-_Chillin_B_r8jugi.webp',
+  '3.5" hand made resin pipe – rasta man':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370708/3.5_Hand_Pipe-Rasta_Man_vlyugz.webp',
+  '3.5" hand made resin pipe – ziggy':'https://res.cloudinary.com/dhcmesl9r/image/upload/q_auto/f_auto/v1776370703/3.5_Hand_Pipe-Ziggy_kurjh4.webp',
+  '10″ rick and morty beaker bottom – rocket ship':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370910/10_Rick_and_Morty_Beaker_Bottom-Rocket_Ship_qkxlwm.webp',
+  '10″ rick and morty beaker bottom – morty':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370915/10_Rick_and_Morty_Beaker_Bottom-_Morty_mllagh.webp',
+  '8" ceramic rick and morty banana pipe':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370913/8_inch_Ceramic_Rick_and_Morty_Banana_Pipe_vxnwdh.webp',
+  'hemper – 7" sphere base – teal':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370905/7_inch_Hemper_Sphere_Base_Water_Pipe-Teal_h1xsem.webp',
+  'hemper – 7" sphere base – black':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370900/7_inch_Hemper_Sphere_Base_Water_Pipe-Black_q9ltmu.webp',
+  'hemper – 7" sphere base – jade':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370908/7_inch_Hemper_Sphere_Base_Water_Pipe-Jade_r0rj7z.webp',
+  'hemper – 7" sphere base – green':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370901/7_inch_Hemper_Sphere_Base_Water_Pipe-Green_xc3lej.webp',
+  'hemper – 6" tornado vortex – green':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370922/Hemper-_6_inch_Tornado_Vortex_Water_Pipes-Green_opb67y.webp',
+  'hemper – 6" tornado vortex – blue':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370914/Hemper-_6_inch_Tornado_Vortex_Water_Pipes-Blue_mimzeo.webp',
+  '10" bloody glass beaker bottom water pipe':'https://res.cloudinary.com/dhcmesl9r/image/upload/v1776370916/10_inch_Bloody_Glass_Beaker_Bottom_Water_Pipe_uubymx.webp',
+};
+
+const CATEGORY_META = {
+  'Cookies':{icon:'🍪',sub:'International Snacks'},
+  'Chips':{icon:'🥔',sub:'International Snacks'},
+  'Drinks':{icon:'🥤',sub:'International Beverages'},
+  'Candy':{icon:'🍬',sub:'Novelty Sweets'},
+  'Candles':{icon:'🕯️',sub:'Lifestyle Products'},
+  'Signs':{icon:'🪧',sub:'Novelty Décor'},
+  'Coffee Mugs':{icon:'☕',sub:'Lifestyle & Gifting'},
+  'Wraps':{icon:'🌿',sub:'Hemp & Organic Products'},
+  'Smoking Accessories':{icon:'🛠️',sub:'Hardware & Accessories'},
+  'Hand Pipes':{icon:'🪈',sub:'Resin & Glass'},
+  'Water Pipes':{icon:'💧',sub:'Glass & Ceramic'},
+};
+
+let allProducts = [];
+let cart = [];
+let currentProduct = null;
+let activeCategory = 'all';
+let searchTerm = '';
+
+// ── FETCH CSV ──
+function fetchCatalog() {
+  Papa.parse(CSV_URL, {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    complete: res => {
+      allProducts = res.data.map(r => {
+        const keys = Object.keys(r);
+        return {
+          name:     (r['Product Name'] || r[keys[0]] || '').trim(),
+          category: (r['Category'] || r[keys[1]] || '').trim(),
+          size:     (r['Size'] || r[keys[2]] || '').trim(),
+          origin:   (r['Country of Origin'] || r['Origin'] || r[keys[3]] || '').trim(),
+          upc:      (r['UPC'] || r[keys[4]] || '').trim(),
+          wholesale:(r['Wholesale Price'] || r['Wholesale'] || r['Cost'] || r[keys[5]] || '').trim(),
+          msrp:     (r['MSRP'] || r['Retail Price'] || r['Retail'] || r[keys[6]] || '').trim(),
+          margin:   (r['Margin'] || r[keys[7]] || '').trim(),
+        };
+      }).filter(p => p.name);
+      renderCatalog();
+    },
+    error: () => {
+      document.getElementById('loading').innerHTML = '⚠️ Could not load catalog. Please refresh.';
+    }
+  });
+}
+
+function getImage(name) {
+  return IMAGE_MAP[name.toLowerCase().trim()] || null;
+}
+
+function imgHTML(name, large=false) {
+  const src = getImage(name);
+  if (src) return `<img src="${src}" alt="${name}" loading="lazy">`;
+  return `<div class="coming-soon">
+    <div class="coming-soon-icon">📷</div>
+    <div class="coming-soon-text">Picture Coming Soon</div>
+  </div>`;
+}
+
+function formatPrice(p) {
+  if (!p) return '—';
+  if (p.startsWith('$')) return p;
+  const n = parseFloat(p.replace(/[^0-9.]/g,''));
+  return isNaN(n) ? p : '$'+n.toFixed(2);
+}
+
+function calcMargin(w, m) {
+  const wn = parseFloat(w.replace(/[^0-9.]/g,'')),
+        mn = parseFloat(m.replace(/[^0-9.]/g,''));
+  if (!wn || !mn || mn === 0) return null;
+  return Math.round(((mn - wn) / mn) * 100) + '%';
+}
+
+// ── RENDER ──
+function renderCatalog() {
+  const main = document.getElementById('main');
+  document.getElementById('loading').style.display = 'none';
+
+  const filtered = allProducts.filter(p => {
+    const matchCat  = activeCategory === 'all' || p.category.toLowerCase().includes(activeCategory.toLowerCase());
+    const matchSearch = !searchTerm || p.name.toLowerCase().includes(searchTerm) || p.category.toLowerCase().includes(searchTerm);
+    return matchCat && matchSearch;
+  });
+
+  // Group by category
+  const grouped = {};
+  filtered.forEach(p => {
+    const c = p.category || 'Other';
+    if (!grouped[c]) grouped[c] = [];
+    grouped[c].push(p);
+  });
+
+  // Remove old sections
+  main.querySelectorAll('.cat-section').forEach(e => e.remove());
+
+  if (!Object.keys(grouped).length) {
+    if (!main.querySelector('.no-results')) {
+      const nr = document.createElement('div');
+      nr.className = 'no-results';
+      nr.textContent = 'No products found.';
+      main.appendChild(nr);
+    }
+    return;
+  }
+  main.querySelector('.no-results')?.remove();
+
+  Object.entries(grouped).forEach(([cat, products]) => {
+    const meta = CATEGORY_META[cat] || {icon:'📦', sub:'Products'};
+    const margin = products[0] ? calcMargin(products[0].wholesale, products[0].msrp) : null;
+
+    const section = document.createElement('div');
+    section.className = 'cat-section';
+    section.id = 'cat-' + cat.replace(/\s+/g,'-');
+    section.innerHTML = `
+      <div class="cat-header">
+        <div class="cat-icon">${meta.icon}</div>
+        <div>
+          <div class="cat-title">${cat}</div>
+          <div class="cat-subtitle">${meta.sub}</div>
+        </div>
+        <div class="cat-count">${products.length} product${products.length !== 1 ? 's' : ''}</div>
+      </div>
+      <div class="product-grid">${products.map(cardHTML).join('')}</div>`;
+    main.appendChild(section);
+  });
+}
+
+function cardHTML(p) {
+  const w = formatPrice(p.wholesale), m = formatPrice(p.msrp);
+  const margin = p.margin || calcMargin(p.wholesale, p.msrp) || '';
+  const inCart = cart.find(c => c.name === p.name);
+  return `<div class="product-card" onclick="openProduct('${p.name.replace(/'/g,"\\'")}')">
+    <div class="card-img">${imgHTML(p.name)}</div>
+    <div class="card-body">
+      <div class="card-name">${p.name}</div>
+      <div class="card-meta">
+        ${p.size ? `<span>${p.size}</span>` : ''}
+        ${p.origin && p.origin !== '—' ? `<span>${p.origin}</span>` : ''}
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="price-cell wholesale">
+        <span class="price-label">Wholesale</span>
+        <span class="price-value">${w}</span>
+        ${margin ? `<span class="margin-tag">${margin} margin</span>` : ''}
+      </div>
+      <div class="price-cell msrp">
+        <span class="price-label">MSRP</span>
+        <span class="price-value">${m}</span>
+      </div>
+    </div>
+    <button class="add-to-order ${inCart?'added':''}" onclick="event.stopPropagation();addToOrder('${p.name.replace(/'/g,"\\'")}')">
+      ${inCart ? '✓ Added' : '+ Add to Order'}
+    </button>
+  </div>`;
+}
+
+// ── FILTERS ──
+function filterCat(cat, btn) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCatalog();
+  if (cat !== 'all') {
+    setTimeout(() => {
+      const el = document.getElementById('cat-' + cat.replace(/\s+/g,'-'));
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+  }
+}
+
+function filterProducts() {
+  searchTerm = document.getElementById('search').value.toLowerCase().trim();
+  renderCatalog();
+}
+
+// ── PRODUCT MODAL ──
+function openProduct(name) {
+  const p = allProducts.find(x => x.name === name);
+  if (!p) return;
+  currentProduct = p;
+  const w = formatPrice(p.wholesale), m = formatPrice(p.msrp);
+  const margin = p.margin || calcMargin(p.wholesale, p.msrp) || '—';
+  const src = getImage(p.name);
+
+  document.getElementById('modalImg').innerHTML = src
+    ? `<img src="${src}" alt="${p.name}">`
+    : `<div class="coming-soon" style="width:100%;height:100%"><div class="coming-soon-icon">📷</div><div class="coming-soon-text">Picture Coming Soon</div></div>`;
+
+  document.getElementById('modalCat').textContent = p.category;
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalDetails').innerHTML = `
+    <div class="modal-detail green"><div class="modal-detail-label">Wholesale</div><div class="modal-detail-value">${w}</div></div>
+    <div class="modal-detail"><div class="modal-detail-label">MSRP</div><div class="modal-detail-value">${m}</div></div>
+    <div class="modal-detail"><div class="modal-detail-label">Margin</div><div class="modal-detail-value">${margin}</div></div>
+    <div class="modal-detail"><div class="modal-detail-label">Size</div><div class="modal-detail-value">${p.size||'—'}</div></div>
+    ${p.origin && p.origin !== '—' ? `<div class="modal-detail"><div class="modal-detail-label">Origin</div><div class="modal-detail-value">${p.origin}</div></div>` : ''}
+    ${p.upc && p.upc !== '—' ? `<div class="modal-detail"><div class="modal-detail-label">UPC</div><div class="modal-detail-value" style="font-size:13px;font-family:monospace">${p.upc}</div></div>` : ''}
+  `;
+  const inCart = cart.find(c => c.name === p.name);
+  const btn = document.getElementById('modalAddBtn');
+  btn.textContent = inCart ? '✓ Already in Order' : '+ Add to Order';
+  btn.className = 'modal-add-btn' + (inCart ? ' added' : '');
+
+  document.getElementById('productModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProductModal() {
+  document.getElementById('productModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModal(e) {
+  if (e.target.id === 'productModal') closeProductModal();
+}
+
+function addToOrderFromModal() {
+  if (currentProduct) addToOrder(currentProduct.name);
+  const btn = document.getElementById('modalAddBtn');
+  btn.textContent = '✓ Already in Order';
+  btn.className = 'modal-add-btn added';
+}
+
+// ── CART ──
+function addToOrder(name) {
+  const p = allProducts.find(x => x.name === name);
+  if (!p) return;
+  const existing = cart.find(c => c.name === name);
+  if (existing) { existing.qty++; }
+  else { cart.push({...p, qty:1}); }
+  updateCartBar();
+  renderCatalog();
+}
+
+function updateCartBar() {
+  const bar = document.getElementById('cartBar');
+  const count = cart.reduce((s, c) => s + c.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  bar.style.display = count > 0 ? 'flex' : 'none';
+}
+
+function openOrderModal() {
+  renderOrderItems();
+  document.getElementById('orderModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOrderModal() {
+  document.getElementById('orderModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeOrderModalOverlay(e) {
+  if (e.target.id === 'orderModal') closeOrderModal();
+}
+
+function renderOrderItems() {
+  const el = document.getElementById('orderItems');
+  const totalEl = document.getElementById('orderTotal');
+  if (!cart.length) {
+    el.innerHTML = '<div class="empty-cart">Your order is empty.<br>Add products from the catalog.</div>';
+    totalEl.textContent = '';
+    return;
+  }
+  let total = 0;
+  el.innerHTML = cart.map((item, i) => {
+    const w = parseFloat(item.wholesale.replace(/[^0-9.]/g,'')) || 0;
+    total += w * item.qty;
+    const src = getImage(item.name);
+    return `<div class="order-item">
+      ${src ? `<img class="order-item-img" src="${src}" alt="${item.name}">` : `<div class="order-item-img" style="display:flex;align-items:center;justify-content:center;font-size:20px;">📷</div>`}
+      <div class="order-item-name">${item.name}</div>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+        <span class="qty-num">${item.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+      </div>
+      <div class="order-item-price">${formatPrice(item.wholesale)}</div>
+    </div>`;
+  }).join('');
+  totalEl.innerHTML = `Wholesale Total: <span style="font-size:18px">$${total.toFixed(2)}</span>`;
+}
+
+function changeQty(i, delta) {
+  cart[i].qty += delta;
+  if (cart[i].qty <= 0) cart.splice(i, 1);
+  updateCartBar();
+  renderOrderItems();
+  renderCatalog();
+}
+
+// ── SUBMIT ORDER ──
+async function submitOrder() {
+  const name  = document.getElementById('retailerName').value.trim();
+  const email = document.getElementById('retailerEmail').value.trim();
+  const phone = document.getElementById('retailerPhone').value.trim();
+  const notes = document.getElementById('orderNotes').value.trim();
+
+  if (!name || !email) { alert('Please enter your name and email.'); return; }
+  if (!cart.length) { alert('Your order is empty!'); return; }
+
+  const itemsList = cart.map(item =>
+    `• ${item.name} (x${item.qty}) — ${formatPrice(item.wholesale)} each`
+  ).join('\n');
+
+  const total = cart.reduce((s,c) => {
+    const w = parseFloat(c.wholesale.replace(/[^0-9.]/g,'')) || 0;
+    return s + w * c.qty;
+  }, 0);
+
+  const subject = encodeURIComponent(`Wholesale Order from ${name}`);
+  const body = encodeURIComponent(
+    `New Wholesale Order\n` +
+    `==================\n\n` +
+    `Retailer: ${name}\n` +
+    `Email: ${email}\n` +
+    `Phone: ${phone || 'Not provided'}\n\n` +
+    `ORDER ITEMS:\n${itemsList}\n\n` +
+    `Wholesale Total: $${total.toFixed(2)}\n\n` +
+    `Notes: ${notes || 'None'}\n\n` +
+    `Sent from Shamrock Distribution Wholesale Catalog`
+  );
+
+  window.location.href = `mailto:support@shamrockdistribution.com?subject=${subject}&body=${body}`;
+
+  document.getElementById('successMsg').style.display = 'block';
+  cart = [];
+  updateCartBar();
+  renderCatalog();
+}
+
+// ── INIT ──
+fetchCatalog();
+</script>
+</body>
+</html>
